@@ -1,28 +1,36 @@
-import { definePreset } from '@unocss/core'
+import { definePreset } from "@unocss/core";
 
-export interface StarterOptions {
-  span?: number
+export interface PresetOptions {
+  // span?: number
 }
 
-export const presetStarter = definePreset((_options: StarterOptions = {}) => {
-  const span = _options.span || 12
+export const presetExperimentalPopover = definePreset((_options: PresetOptions = {}) => {
+  // const span = _options.span || 12
 
   return {
-    name: 'unocss-preset-starter',
+    name: "unocss-preset-experimental-popover",
     // Customize your preset here
     rules: [
-      ['custom-rule', { color: 'red' }],
-      [
-        /col-(\d+)/,
-        ([_, s]) => ({ width: `calc(${s} / ${span} * 100%)` }),
-        { autocomplete: 'col-<span>' },
-      ],
+      ["transition-discrete", { "transition-behavior": "allow-discrete" }],
+      ["transition-normal", { "transition-behavior": "normal" }],
+    ],
+    variants: [
+      (matcher) => {
+        if (!matcher.startsWith("starting:")) return;
+
+        return {
+          matcher: matcher.slice(9),
+          handle: (input, next) =>
+            next({
+              ...input,
+              parent: `@starting-style`,
+            }),
+        };
+      },
     ],
     // Customize AutoComplete
     autocomplete: {
-      shorthands: {
-        span: Array.from({ length: span }, (_, i) => `${i + 1}`),
-      },
+      shorthands: {},
     },
-  }
-})
+  };
+});

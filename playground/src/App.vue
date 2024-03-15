@@ -1,20 +1,22 @@
 <template>
-  <div>
-    <div class="custom-rule">
-      Unpreset Starter
-    </div>
-    <div class="flex">
-      <div class="bg-white text-center col-3">
-        Col 3
-      </div>
-      <div class="bg-blue-3 text-center col-4">
-        Col 4
-      </div>
-      <div class="bg-blue-3 text-center col-5">
-        Col 5
-      </div>
-    </div>
-  </div>
+<button popovertarget="my-styled-popover">Open styled Popover</button>
+
+<div class="m-0 transition-all top-20 p-4 mx-auto
+  starting:popover-open:translate-y-0
+  transition-all
+  transition-discrete
+  popover-open:translate-y-40
+  starting:popover-open:opacity-0
+  popover-open:opacity-100
+  opacity-0
+  
+  starting:popover-open:backdrop:bg-black
+  popover-open:backdrop:bg-blue-300
+  backdrop:bg-black
+  backdrop:transition-all
+  backdrop:transition-discrete
+  " 
+  popover id="my-styled-popover">Greetings, one and all! (styled popover)</div>
 </template>
 
 <style>
